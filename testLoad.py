@@ -58,5 +58,5 @@ load()
 # testFile.write(str(trump))
 # testFile.close()
 
-print(trump.text)
+#print(trump.text)
 #print(trump['text'])
