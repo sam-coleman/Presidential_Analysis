@@ -14,8 +14,6 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 tweets = []
-# for status in tweepy.Cursor(api.user_timeline, screen_name='@realDonaldTrump', tweet_mode="extended", include_rts= 0).items():
-#     tweets.append(status.full_text)
 
 def get_tweets(screen_name, file_name):
     """
