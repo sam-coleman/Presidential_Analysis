@@ -1,3 +1,4 @@
 
 #Don't push these files to github
 config.py
+*.pyc
