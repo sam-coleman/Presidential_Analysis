@@ -15,9 +15,9 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 tweets = []
 
-def get_tweets(screen_name, file_name):
+def pull_tweets(screen_name, file_name):
     """
-    Get tweets for each user and save into a txt file
+    Get tweets for user and save into a txt file
     """
     user_tweets = []
     user_lines = []
@@ -41,42 +41,59 @@ def get_tweets(screen_name, file_name):
     pickle.dump(user_words, f)
     f.close()
 
-def get_trump_tweets():
+def get_user_tweets(screen_name, file_name):
     """
-    Get Trump's Tweets if file doesn't exist, if it does unpickle it
+    Get tweets for the user if file doesn't exist, if it does unpickle it
     """
-    file = Path('TrumpTweets.pickle')
+    file = Path(file_name)
     if file.is_file():
-        input_file = open('TrumpTweets.pickle', 'rb')
+        input_file=open(file_name, 'rb')
         reloaded_words = pickle.load(input_file)
         return reloaded_words
     else:
-        get_tweets('@realDonaldTrump', 'TrumpTweets.pickle')
+        pull_tweets(screen_name, file_name)
+        #get_user_tweets(screen_name, file_name)
 
-def get_bernie_tweets():
-    """
-    Get Bernie's Tweets if file doesn't exist, if it does unpickle it
-    """
-    file = Path('BernieTweets.pickle')
-    if file.is_file():
-        input_file = open('BernieTweets.pickle', 'rb')
-        reloaded_words = pickle.load(input_file)
-        return reloaded_words
-    else:
-        get_tweets('@BernieSanders', 'BernieTweets.pickle')
+TrumpWords = get_user_tweets('@realDonaldTrump', 'TrumpTweets.pickle')
+BernieWords = get_user_tweets('@BernieSanders', 'BernieTweets.pickle')
+BidenWords = get_user_tweets('@JoeBiden', 'BidenTweets.pickle')
 
-def get_biden_tweets():
-    """
-    Get Biden's Tweets if file doesn't exist, if it does unpickle it
-    """
-    file = Path('BidenTweets.pickle')
-    if file.is_file():
-        input_file = open('BidenTweets.pickle', 'rb')
-        reloaded_words = pickle.load(input_file)
-        return reloaded_words
-    else:
-        get_tweets('@JoeBiden', 'BidenTweets.pickle')
+# def get_trump_tweets():
+#     """
+#     Get Trump's Tweets if file doesn't exist, if it does unpickle it
+#     """
+#     file = Path('TrumpTweets.pickle')
+#     if file.is_file():
+#         input_file = open('TrumpTweets.pickle', 'rb')
+#         reloaded_words = pickle.load(input_file)
+#         return reloaded_words
+#     else:
+#         pull_tweets('@realDonaldTrump', 'TrumpTweets.pickle')
+#
+# def get_bernie_tweets():
+#     """
+#     Get Bernie's Tweets if file doesn't exist, if it does unpickle it
+#     """
+#     file = Path('BernieTweets.pickle')
+#     if file.is_file():
+#         input_file = open('BernieTweets.pickle', 'rb')
+#         reloaded_words = pickle.load(input_file)
+#         return reloaded_words
+#     else:
+#         get_tweets('@BernieSanders', 'BernieTweets.pickle')
+#
+# def get_biden_tweets():
+#     """
+#     Get Biden's Tweets if file doesn't exist, if it does unpickle it
+#     """
+#     file = Path('BidenTweets.pickle')
+#     if file.is_file():
+#         input_file = open('BidenTweets.pickle', 'rb')
+#         reloaded_words = pickle.load(input_file)
+#         return reloaded_words
+#     else:
+#         get_tweets('@JoeBiden', 'BidenTweets.pickle')
 
-BernieWords = get_bernie_tweets()
-TrumpWords = get_trump_tweets()
-BidenWords = get_biden_tweets()
+# BernieWords = get_bernie_tweets()
+# TrumpWords = get_trump_tweets()
+# BidenWords = get_biden_tweets()
