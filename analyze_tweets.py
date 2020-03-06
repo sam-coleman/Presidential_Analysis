@@ -64,14 +64,14 @@ biden_top = get_top_n(50, BidenDict, 'BidenTopWords.txt')
 trump_top = get_top_n(50, TrumpDict, 'TrumpTopWords.txt')
 bernie_top = get_top_n(50, BernieDict, 'BernieTopWords.txt')
 
-def create_word_cloud(dict, file_name, title):
-
-    wc = WordCloud(background_color="white",width=3000,height=3000, max_words=30,relative_scaling=0.5,normalize_plurals=False).generate_from_frequencies(dict)
-    plt.imshow(wc, interpolation='bilinear')
-    plt.axis("off")
-    plt.title(title)
-    plt.savefig(file_name)
-
+# def create_word_cloud(dict, file_name, title):
+#
+#     wc = WordCloud(background_color="white",width=3000,height=3000, max_words=30,relative_scaling=0.5,normalize_plurals=False).generate_from_frequencies(dict)
+#     plt.imshow(wc, interpolation='bilinear')
+#     plt.axis("off")
+#     plt.title(title)
+#     plt.savefig(file_name)
+#
 # trump_cloud = create_word_cloud(TrumpDict, 'TrumpWordCloud', 'Trump Top Words Visualization')
 # bernie_cloud = create_word_cloud(BernieDict, 'BernieWordCloud', 'Bernie Top Words Visualization')
 # biden_cloud = create_word_cloud(BidenDict, 'BidenWordCloud', 'Biden Top Words Visualization')

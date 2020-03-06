@@ -22,7 +22,7 @@ def pull_tweets(screen_name, file_name):
     user_tweets = []
     user_lines = []
     user_words = []
-    for status in tweepy.Cursor(api.user_timeline, screen_name=screen_name, tweet_mode="extended", include_rts= 0).items():
+    for status in tweepy.Cursor(api.user_timeline, screen_name=screen_name, tweet_mode="extended", include_rts= 0, count = 199).items():
         user_tweets.append(status.full_text)
 
     for line in user_tweets:
