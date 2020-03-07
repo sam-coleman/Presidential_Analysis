@@ -48,15 +48,8 @@ def get_top_n(n, dict, file_name):
     top_words = []
     for pair in top:
         for item in pair:
-            top_words.append(item)
-
-    #delete frequency numbers from list (just leave the actual words)
-    index = 0
-    while index < len(top_words):
-        if isinstance(top_words[index], int):
-            del top_words[index]
-        else:
-            index += 1
+            if not isinstance(item, int):
+                top_words.append(item)
 
     #Save to file
     f = open(file_name, 'w')
@@ -70,9 +63,10 @@ def create_word_cloud(dict, file_name, title):
 
     dict: dictionary to use
     file_name: name of file to save to
-    title: title fo word cloud to display on image
+    title: title of word cloud to display on image
     """
-    wc = WordCloud(background_color="white",width=3000,height=3000, max_words=30,relative_scaling=0.5,normalize_plurals=False).generate_from_frequencies(dict)
+    #generate word cloud using WordCloud library
+    wc = WordCloud(background_color="white",width=3000,height=3000, relative_scaling=0.5).generate_from_frequencies(dict)
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
     plt.title(title)
@@ -86,6 +80,6 @@ if __name__ == '__main__':
     biden_top = get_top_n(50, BidenDict, 'BidenTopWords.txt')
     trump_top = get_top_n(50, TrumpDict, 'TrumpTopWords.txt')
     bernie_top = get_top_n(50, BernieDict, 'BernieTopWords.txt')
-    trump_cloud = create_word_cloud(TrumpDict, 'TrumpWordCloud1', 'Trump Top Words Visualization')
-    bernie_cloud = create_word_cloud(BernieDict, 'BernieWordCloud1', 'Bernie Top Words Visualization')
-    biden_cloud = create_word_cloud(BidenDict, 'BidenWordCloud1', 'Biden Top Words Visualization')
+    trump_cloud = create_word_cloud(TrumpDict, 'TrumpWordCloud', 'Trump Top Words Visualization')
+    bernie_cloud = create_word_cloud(BernieDict, 'BernieWordCloud', 'Bernie Top Words Visualization')
+    biden_cloud = create_word_cloud(BidenDict, 'BidenWordCloud', 'Biden Top Words Visualization')
