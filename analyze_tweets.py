@@ -5,18 +5,18 @@ MP 3: Text Mining
 @author: Sam Coleman
 """
 
-#from get_tweets import TrumpWords, BernieWords, BidenWords
 from get_tweets import pull_all_tweets
 from PIL import Image
 from wordcloud import WordCloud
 from matplotlib import pyplot as plt
 
-
 def get_freq_dict(user_list):
     """
-    Get dictionry of top words and their respective frequencies.
+    Get dictionry of top words with words as keys and their respective frequencies as values.
 
-    user_list: Which list of words (TrumpWords, BernieWords, BidenWords)
+    user_list: Which list of words to use(TrumpWords, BernieWords, BidenWords)
+
+    returns: word-frequency dictionary
     """
     d_freq = dict()
 
@@ -32,14 +32,25 @@ def get_freq_dict(user_list):
     return d_freq
 
 def get_top_n(n, dict, file_name):
+    """
+    Get list of top used words and write to file
 
+    n: number of top words you want
+    dict: dictionary to use
+    file_name: name of file to write to (and create if needed)
+
+    returns: top word list
+    """
     d_sorted = sorted(dict.items(), key=lambda kv: kv[1], reverse=True)
     top = d_sorted[0:n]
+
+    #put top n key and values into a list
     top_words = []
     for pair in top:
-        for key in pair:
-            top_words.append(key)
+        for item in pair:
+            top_words.append(item)
 
+    #delete frequency numbers from list (just leave the actual words)
     index = 0
     while index < len(top_words):
         if isinstance(top_words[index], int):
@@ -54,7 +65,13 @@ def get_top_n(n, dict, file_name):
     return top_words
 
 def create_word_cloud(dict, file_name, title):
+    """
+    create word cloud from frequency dictionary
 
+    dict: dictionary to use
+    file_name: name of file to save to
+    title: title fo word cloud to display on image
+    """
     wc = WordCloud(background_color="white",width=3000,height=3000, max_words=30,relative_scaling=0.5,normalize_plurals=False).generate_from_frequencies(dict)
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
