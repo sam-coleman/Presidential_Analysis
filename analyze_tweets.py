@@ -22,7 +22,7 @@ def get_freq_dict(user_list):
 
     #meaningless words to not include
     ignore_words = ['the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'it',
-    'for', 'on', 'by', 'from', 'this', 'is', 'it', 'for', 'on', 'by', 'from',
+    'for', 'on', 'by', 'from', 'this', 'is', 'for', 'on', 'by', 'from',
     'this', 'is', '—', 'are', 'as', 'at', 'an', 'amp', 'if', 'has', 'was']
 
     for word in user_list:
